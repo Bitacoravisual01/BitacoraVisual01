@@ -1,16 +1,351 @@
-## Hi there 👋
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Violeta - Animación 3D/2D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!--
-**Bitacoravisual01/BitacoraVisual01** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #1a0d2e 50%, #0f0a1e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
 
-Here are some ideas to get you started:
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(42, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #c084fc, #8b5cf6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #e879f9;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #c084fc;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23c084fc" stop-opacity="0.1"/><stop offset="100%" stop-color="%23a855f7" stop-opacity="0.05"/></radialGradient></defs><rect width="100%" height="100%" fill="url(%23a)"/><circle cx="200" cy="200" r="50" fill="%23c084fc" opacity="0.3"/><circle cx="800" cy="300" r="30" fill="%238b5cf6" opacity="0.4"/><circle cx="100" cy="800" r="40" fill="%23a855f7" opacity="0.3"/></svg>');
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #c084fc, #8b5cf6, #a855f7, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px #c084fc); }
+            to { filter: drop-shadow(0 0 30px #8b5cf6); }
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(45deg, #c084fc, #8b5cf6);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(192, 132, 252, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(192, 132, 252, 0.6);
+        }
+
+        /* Portfolio Grid */
+        .portfolio {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, #c084fc, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: rgba(42, 24, 16, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            border-color: #c084fc;
+            box-shadow: 0 20px 40px rgba(192, 132, 252, 0.3);
+        }
+
+        .portfolio-item img, .portfolio-item video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            color: #e879f9;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-info p {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 2rem;
+            text-align: center;
+            background: rgba(26, 13, 46, 0.5);
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #c084fc, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .contact-item {
+            background: rgba(42, 24, 16, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(192, 132, 252, 0.1);
+            transform: scale(1.05);
+        }
+
+        .contact-item i {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #c084fc, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        /* Commission Button */
+        .commission-cta {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            background: linear-gradient(45deg, #c084fc, #8b5cf6, #a855f7);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            box-shadow: 0 15px 35px rgba(192, 132, 252, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 15px 35px rgba(192, 132, 252, 0.5); }
+            50% { box-shadow: 0 15px 45px rgba(192, 132, 252, 0.8); }
+            100% { box-shadow: 0 15px 35px rgba(192, 132, 252, 0.5); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(15, 10, 30, 0.8);
+            border-top: 1px solid rgba(192, 132, 252, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Studio Violeta</div>
+            <ul class="nav-links">
+                <li><a href="#portfolio">Portafolio</a></li>
+                <li><a href="#contact">Contacto</a></li>
+                <li><a href="#commission">Comisiones</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Animación 3D & 2D<br><span style="color: #c084fc;">✨ Que Hipnotiza ✨</span></h1>
+            <p>Transformamos ideas en experiencias visuales inolvidables</p>
+            <a href="#commission" class="cta-button">¡Comienza Tu Proyecto!</a>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="portfolio">
+        <h2 class="section-title">📁 Nuestro Portafolio</h2>
+        <div class="grid">
+            <!-- Reemplaza las imágenes/videos con tus trabajos -->
+            <div class="portfolio-item">
+                <video autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-3d-animation-with-gray-and-purple-geometric-shapes-32630-large.mp4" type="video/mp4">
+                    Tu video 3D aquí
+                </video>
+                <div class="portfolio-info">
+                    <h3>Animación 3D Publicitaria</h3>
+                    <p>Producto en rotación con efectos de partículas</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76bbb17e?w=800&h=600&fit=crop" alt="2D Animation">
+                <div class="portfolio-info">
+                    <h3>Animación 2D Explicativa</h3>
+                    <p>Video educativo con personajes animados</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <video autoplay muted loop playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-purple-3d-shapes-animation-32632-large.mp4" type="video/mp4">
+                    Tu video aquí
+                </video>
+                <div class="portfolio-info">
+                    <h3>Motion Graphics</h3>
+                    <p>Identidad visual animada para marca</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop" alt="3D Render">
+                <div class="portfolio-info">
+                    <h3>Render 3D Arquitectónico</h3>
+                    <p>Visualización fotorrealista de proyecto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <h2>💜 ¿Listo para tu proyecto?</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <h3>Correo</h3>
+                <p>hello@studiovioleta.com</p>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <h3>WhatsApp</h3>
+                <p>+1 (555) 123-4567</p>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-discord"></i>
+                <h3>Discord</h3>
+                <p>studiovioleta#0001</p>
+            </div>
+        </div>
+        <a href="#commission" class="commission-cta" id="commission">
+            🚀 ¡Solicitar Comisión Ahora!
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Studio Violeta. Animando tus sueños en violeta. ✨</p>
+    </footer>
+</body>
+</html>
